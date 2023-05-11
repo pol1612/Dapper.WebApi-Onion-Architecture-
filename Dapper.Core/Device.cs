@@ -6,7 +6,7 @@
         public string? Name { get; set; }
         public string? TelemetryType { get; set; }
 
-        public Device(Guid id, string? name, string? telemetryType)
+        public Device(Guid id, string name, string telemetryType)
         {
             Id = id;
             Name = name;
