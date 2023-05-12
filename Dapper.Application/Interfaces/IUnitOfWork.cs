@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper.Core.Entities;
 
 namespace Dapper.Application.Interfaces
 {
-    public interface IDeviceRepository : IGenericRepository<Device> 
+    public interface IUnitOfWork
     {
-
+        IDeviceRepository DeviceRepository { get; }
     }
 }
