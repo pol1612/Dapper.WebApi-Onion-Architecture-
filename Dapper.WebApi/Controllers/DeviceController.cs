@@ -6,14 +6,14 @@ using Dapper.Infrastructure.UnitsOfWork;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace MyProject.Dapper.WebApi.Controllers
+namespace Dapper.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DevicesController : ControllerBase
+    public class DeviceController : ControllerBase
     {
         private IUnitOfWork UnitOfWork;
-        public DevicesController(IUnitOfWork unitOfWork)
+        public DeviceController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
