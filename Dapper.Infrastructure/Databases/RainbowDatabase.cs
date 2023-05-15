@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MyProject.Dapper.Core.Entities;
 
-namespace MyProject.Dapper.Infrastructure.Database
+namespace MyProject.Dapper.Infrastructure.Databases
 {
     public class RainbowDatabase : Database<RainbowDatabase>
     {

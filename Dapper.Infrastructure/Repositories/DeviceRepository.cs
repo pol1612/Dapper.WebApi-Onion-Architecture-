@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using MyProject.Dapper.Core.Entities;
+using MyProject.Dapper.Infrastructure.Databases;
 using Dapper;
 
 namespace MyProject.Dapper.Infrastructure
@@ -17,6 +18,10 @@ namespace MyProject.Dapper.Infrastructure
         }
         public Task<Guid> AddAsync(Device entity)
         {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+
+            }
         }
 
         public Task<Guid> DeleteAsync(Guid id)
