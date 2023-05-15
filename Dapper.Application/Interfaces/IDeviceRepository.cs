@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper.Core.Entities;
+using MyProject.Dapper.Core.Entities;
 
-namespace Dapper.Application.Interfaces
+namespace MyProject.Dapper.Application.Interfaces
 {
     public interface IDeviceRepository : IGenericRepository<Device> 
     {

@@ -1,17 +1,25 @@
-﻿using Dapper.Application.Interfaces;
-using Dapper.Core.Entities;
+﻿using MyProject.Dapper.Application.Interfaces;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
+using MyProject.Dapper.Core.Entities;
+using Dapper;
 
-namespace Dapper.Infrastructure
+namespace MyProject.Dapper.Infrastructure
 {
 
     public class DeviceRepository : IDeviceRepository
     {
-        public Task<int> AddAsync(Device entity)
+        private readonly IConfiguration _configuration;
+        public DeviceRepository(IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _configuration = configuration;
+        }
+        public Task<Guid> AddAsync(Device entity)
+        {
         }
 
-        public Task<int> DeleteAsync(Guid id)
+        public Task<Guid> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -26,7 +34,7 @@ namespace Dapper.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateAsync(Device entity)
+        public Task<Guid> UpdateAsync(Device entity)
         {
             throw new NotImplementedException();
         }
