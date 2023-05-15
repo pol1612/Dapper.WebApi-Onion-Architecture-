@@ -11,7 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddInfrastructure();
 builder.Services.AddSwaggerGen
     (
-    c => c.SwaggerDoc("V1", new OpenApiInfo { Title = "Dapper.WebApi", Version = "V1"})
+    c => c.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "Dapper - WebApi",
+        })
     );
 var app = builder.Build();
 
@@ -21,12 +25,16 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-}
+}/**
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{id?}");
+    pattern: "{controller}/{id?}");**/
+
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI
+    (
+    c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dapper.WebApi")
+    );
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
