@@ -1,11 +1,11 @@
-﻿using MyProject.Dapper.Application.Interfaces;
+﻿using Dapper.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Dapper.Core.Entities;
 using DapperExtensions;
 using System.Data;
-using Dapper.Application.Interfaces;
+
 
 namespace Dapper.Infrastructure.Repositories
 {
