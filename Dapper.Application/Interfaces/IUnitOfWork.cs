@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyProject.Dapper.Application.Interfaces
+namespace Dapper.Application.Interfaces
 {
     public interface IUnitOfWork
     {
-        IDeviceRepository DeviceRepository { get; }
+        IDeviceRepository Devices { get; }
     }
 }

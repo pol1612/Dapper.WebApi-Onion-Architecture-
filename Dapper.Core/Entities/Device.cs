@@ -1,4 +1,4 @@
-﻿namespace MyProject.Dapper.Core.Entities
+﻿namespace Dapper.Core.Entities
 {
     public class Device
     {

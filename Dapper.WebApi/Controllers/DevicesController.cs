@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyProject.Dapper.Core.Entities;
-using MyProject.Dapper.Infrastructure.Repositories;
-using MyProject.Dapper.Application.Interfaces;
+using Dapper.Core.Entities;
+using Dapper.Infrastructure.Repositories;
+using Dapper.Application.Interfaces;
+using Dapper.Infrastructure.UnitsOfWork;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyProject.Dapper.WebApi.Controllers
@@ -10,10 +12,10 @@ namespace MyProject.Dapper.WebApi.Controllers
     [ApiController]
     public class DevicesController : ControllerBase
     {
-        private DeviceRepository deviceRepository;
-        public DevicesController(IDeviceRepository deviceRepository)
+        private IUnitOfWork UnitOfWork;
+        public DevicesController(IUnitOfWork unitOfWork)
         {
-            this.deviceRepository =(DeviceRepository) deviceRepository;
+            UnitOfWork = unitOfWork;
         }
         // GET: api/<DevicesController>
         [HttpGet]
@@ -33,7 +35,7 @@ namespace MyProject.Dapper.WebApi.Controllers
         [HttpPost]
         public async Task<Guid> Post([FromBody] Device device)
         {
-            var id = await deviceRepository.AddAsync(device);
+            var id = await UnitOfWork.Devices.AddAsync(device);
             return id;
         }
 

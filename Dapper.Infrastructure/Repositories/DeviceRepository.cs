@@ -2,12 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
-using MyProject.Dapper.Core.Entities;
-using MyProject.Dapper.Infrastructure.Databases;
+using Dapper.Core.Entities;
 using DapperExtensions;
 using System.Data;
+using Dapper.Application.Interfaces;
 
-namespace MyProject.Dapper.Infrastructure.Repositories
+namespace Dapper.Infrastructure.Repositories
 {
 
     public class DeviceRepository : IDeviceRepository
