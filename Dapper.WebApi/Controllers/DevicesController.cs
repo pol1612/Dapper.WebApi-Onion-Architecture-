@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using MyProject.Dapper.Core.Entities;
+using MyProject.Dapper.Infrastructure.Repositories;
+using MyProject.Dapper.Application.Interfaces;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyProject.Dapper.WebApi.Controllers
@@ -8,6 +10,11 @@ namespace MyProject.Dapper.WebApi.Controllers
     [ApiController]
     public class DevicesController : ControllerBase
     {
+        private DeviceRepository deviceRepository;
+        public DevicesController(IDeviceRepository deviceRepository)
+        {
+            this.deviceRepository =(DeviceRepository) deviceRepository;
+        }
         // GET: api/<DevicesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +31,10 @@ namespace MyProject.Dapper.WebApi.Controllers
 
         // POST api/<DevicesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Guid> Post([FromBody] Device device)
         {
+            var id = await deviceRepository.AddAsync(device);
+            return id;
         }
 
         // PUT api/<DevicesController>/5

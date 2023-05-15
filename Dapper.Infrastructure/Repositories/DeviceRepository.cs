@@ -4,9 +4,10 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using MyProject.Dapper.Core.Entities;
 using MyProject.Dapper.Infrastructure.Databases;
-using Dapper;
+using DapperExtensions;
+using System.Data;
 
-namespace MyProject.Dapper.Infrastructure
+namespace MyProject.Dapper.Infrastructure.Repositories
 {
 
     public class DeviceRepository : IDeviceRepository
@@ -16,11 +17,15 @@ namespace MyProject.Dapper.Infrastructure
         {
             _configuration = configuration;
         }
-        public Task<Guid> AddAsync(Device entity)
+        public async Task<Guid> AddAsync(Device entity)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
+                db.Open();
 
+                Guid id = await db.InsertAsync(entity);
+                
+                return id;
             }
         }
 
