@@ -3,8 +3,10 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Dapper.Core.Entities;
+using Dapper.Infrastructure.Mappers;
 using DapperExtensions;
 using System.Data;
+using System.Reflection;
 
 
 namespace Dapper.Infrastructure.Repositories
@@ -16,13 +18,23 @@ namespace Dapper.Infrastructure.Repositories
         public DeviceRepository(IConfiguration configuration)
         {
             _configuration = configuration;
+
+            DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
+            
+            DapperExtensions.DapperExtensions.SetMappingAssemblies
+                (
+                    new[] { typeof (DeviceMapper).Assembly}
+                );
+
         }
         public async Task<Guid> AddAsync(Device entity)
         {
+            
             using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
-                db.Open();
 
+                db.Open();
+               
                 Guid id = await db.InsertAsync(entity);
                 
                 return id;

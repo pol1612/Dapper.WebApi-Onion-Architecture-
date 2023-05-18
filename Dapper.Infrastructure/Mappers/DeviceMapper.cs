@@ -12,6 +12,8 @@ namespace Dapper.Infrastructure.Mappers
     {
         public DeviceMapper()
         {
+            
+            Schema("dbo");
             Table("Devices");
             Console.WriteLine("it maps");
             AutoMap();
