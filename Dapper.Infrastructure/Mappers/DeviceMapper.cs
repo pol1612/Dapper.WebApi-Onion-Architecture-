@@ -8,11 +8,11 @@ using DapperExtensions.Mapper;
 
 namespace Dapper.Infrastructure.Mappers
 {
-    public class DeviceMapper : AutoClassMapper<Device>
+    public class DeviceMapper : ClassMapper<Device>
     {
         public DeviceMapper()
         {
-            
+            //throw new NotImplementedException();   
             Schema("dbo");
             Table("Devices");
             Console.WriteLine("it maps");

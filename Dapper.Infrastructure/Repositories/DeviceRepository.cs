@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Dapper.Core.Entities;
 using Dapper.Infrastructure.Mappers;
 using DapperExtensions;
+using DapperExtensions.Mapper;
 using System.Data;
 using System.Reflection;
 
@@ -19,23 +20,30 @@ namespace Dapper.Infrastructure.Repositories
         {
             _configuration = configuration;
 
-            DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
+            DapperExtensions.DapperExtensions.DefaultMapper = typeof(PluralizedAutoClassMapper<>);
             
             DapperExtensions.DapperExtensions.SetMappingAssemblies
                 (
-                    new[] { typeof (DeviceMapper).Assembly}
+                    new[] { typeof (PluralizedAutoClassMapper<>).Assembly}
                 );
 
         }
         public async Task<Guid> AddAsync(Device entity)
         {
+
             
+
             using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
+                DapperExtensions.DapperAsyncExtensions.DefaultMapper = typeof(DeviceMapper);
+                DapperExtensions.DapperExtensions.SetMappingAssemblies
+                (
+                    new[] { typeof(DeviceMapper).Assembly }
+                );
 
                 db.Open();
-               
-                Guid id = await db.InsertAsync(entity);
+                
+                Guid id = await db.InsertAsync<Device>(entity);
                 
                 return id;
             }
