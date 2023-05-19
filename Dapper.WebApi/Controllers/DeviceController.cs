@@ -40,7 +40,8 @@ namespace Dapper.WebApi.Controllers
             try
             {
                 id = await UnitOfWork.Devices.AddAsync(device);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

@@ -19,14 +19,6 @@ namespace Dapper.Infrastructure.Repositories
         public DeviceRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-
-            DapperExtensions.DapperExtensions.DefaultMapper = typeof(PluralizedAutoClassMapper<>);
-            
-            DapperExtensions.DapperExtensions.SetMappingAssemblies
-                (
-                    new[] { typeof (PluralizedAutoClassMapper<>).Assembly}
-                );
-
         }
         public async Task<Guid> AddAsync(Device entity)
         {
@@ -35,7 +27,7 @@ namespace Dapper.Infrastructure.Repositories
 
             using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
-                DapperExtensions.DapperAsyncExtensions.DefaultMapper = typeof(DeviceMapper);
+                DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
                 DapperExtensions.DapperExtensions.SetMappingAssemblies
                 (
                     new[] { typeof(DeviceMapper).Assembly }
