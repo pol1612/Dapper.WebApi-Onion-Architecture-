@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Dapper.Core.Entities;
 using Dapper.Infrastructure.Mappers;
 using DapperExtensions;
+using DapperExtensions.Sql;
+using Npgsql;
 using DapperExtensions.Mapper;
 using System.Data;
 using System.Reflection;
@@ -22,16 +24,29 @@ namespace Dapper.Infrastructure.Repositories
         }
         public async Task<Guid> AddAsync(Device entity)
         {
+            DapperExtensions.DapperExtensions.SetMappingAssemblies
+            (
 
-            
+                    AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .ToArray()
 
-            using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+
+            );
+            DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
+            //DapperExtensions.DapperExtensions.SqlDialect = new PostgreSqlDialect();
+            //DapperAsyncExtensions.SqlDialect = new PostgreSqlDialect();
+            using (IDbConnection db = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
-                DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
-                DapperExtensions.DapperExtensions.SetMappingAssemblies
+                //DapperExtensions.DapperExtensions.DefaultMapper = typeof(DeviceMapper);
+                /*DapperExtensions.DapperExtensions.SetMappingAssemblies
                 (
-                    new[] { typeof(DeviceMapper).Assembly }
-                );
+                    new[]
+                    {
+                        Assembly.GetAssembly(typeof(DeviceMapper))
+                    }
+                ); */
+                
 
                 db.Open();
                 

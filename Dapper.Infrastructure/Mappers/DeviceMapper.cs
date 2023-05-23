@@ -8,14 +8,12 @@ using DapperExtensions.Mapper;
 
 namespace Dapper.Infrastructure.Mappers
 {
-    public class DeviceMapper : ClassMapper<Device> 
+    public sealed class DeviceMapper : PluralizedAutoClassMapper<Device> 
     {
-        public DeviceMapper()
+        public DeviceMapper() : base()
         {
-            //throw new NotImplementedException();   
-            ClassMapper<Device> classMapper = new ClassMapper<Device>();
-            
-            Schema("dbo");
+            throw new NotImplementedException();
+            Schema("public");
             Table("Devices");
             Console.WriteLine("it maps");
             Map(x => x.Id).Key(KeyType.Guid);

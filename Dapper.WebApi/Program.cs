@@ -1,7 +1,9 @@
 using Dapper.WebApi.Extensions;
 using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure();
+/*DapperExtensions.DapperExtensions.SetMappingAssemblies
+    (
+        new[]
+        {
+            AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Where(a => a.FullName.Contains("Dapper.Infrastructure"))
+            .FirstOrDefault()
+        }
+    );*/
+
 builder.Services.AddSwaggerGen
     (
     c => c.SwaggerDoc("v1", new OpenApiInfo
